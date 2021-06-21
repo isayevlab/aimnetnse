@@ -24,7 +24,9 @@ For the convenience, `eval.py` script has a function to convert charge and multi
 
 ## Test datasets
 
-In the test_datasets directory, we share Ions-16 and ChEMBL-20 datasets used to test the performance of the model. The datasets contain PBE0/ma-Def2-SVP energies and NBO atomic charges for the non-equilibrium conformers of neutral organic molecules randomly sampled from PubChem database (Ions-16) and B97-3c optimized conformations of  neutral organic molecules randomly sampled from ChEMBL database (ChEMBL-20). The number in the dataset name corresponds to the maximum number of non-hydrogen atoms in the molecules. The dataset which was used for training the AIMNet-NSE model contains molecules up to 12 non-H atoms, whereis ons-16 and ChEMBL-20 contain the molecules with 13 non-hydrogen atoms or more.
+The Ions-16 and ChEMBL-20 datasets are available at http://doi.org/10.5281/zenodo.5007980
+
+The datasets contain PBE0/ma-Def2-SVP energies and NBO atomic charges for the non-equilibrium conformers of neutral organic molecules randomly sampled from PubChem database (Ions-16) and B97-3c optimized conformations of  neutral organic molecules randomly sampled from ChEMBL database (ChEMBL-20). The number in the dataset name corresponds to the maximum number of non-hydrogen atoms in the molecules. The dataset which was used for training the AIMNet-NSE model contains molecules up to 12 non-H atoms, whereis ons-16 and ChEMBL-20 contain the molecules with 13 non-hydrogen atoms or more.
 
 The datasets formatted as HDF5 files. Data group names have format as `_???`, where `???` corresponds to the number of atoms in molecules.  Each group contain data for `M` molecules, each having `N` atoms. The groups contain following datasets:
 
