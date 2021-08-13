@@ -5,7 +5,7 @@ This repository contains supplementary data and code for the manuscript
 
 **"Teaching a neural network to attach and detach electrons from molecules"** by
 Roman Zubatyuk, Justin S. Smith, Benjamin T. Nebgen, Sergei Tretiak, Olexandr Isayev
-https://doi.org/10.26434/chemrxiv.12725276.v2
+https://www.nature.com/articles/s41467-021-24904-0
 
 
 ## Models
