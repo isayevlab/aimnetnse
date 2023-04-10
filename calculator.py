@@ -28,6 +28,7 @@ class AIMNetNSECalculator(Calculator):
         if 'forces' in properties:
             coord.requires_grad_(True)
 
+        # calculate energies and charges
         Y = self.model(X)
         Y['charges_ab'] = Y['charges'].squeeze()
         Y['charges'] = Y['charges'].sum(-1)  # merge alpha and beta atomic charges
@@ -38,10 +39,8 @@ class AIMNetNSECalculator(Calculator):
             Y['forces'] = - torch.autograd.grad(e, coord, torch.ones_like(e))[0]
 
         # convert to numpy arrays
-        Y.update({k: v.detach().cpu().numpy()
-                  for k, v in Y.items()
-                  if isinstance(v, Tensor)})
-        output = Y.copy()
+        output = {k: v.detach().cpu().numpy()
+                  for k, v in Y.items()}
 
         output['energy'] = output['energy'].sum(-1)
         output['charges'] = output['charges'].squeeze()
