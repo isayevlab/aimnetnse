@@ -1,8 +1,10 @@
-from eval import EnsembleCalculator, load_models, to_numpy
+import sys
+sys.path.append('/usr/local/Cellar/open-babel/3.1.1_2/lib/python3.11/site-packages')
+from scripts.eval import load_models, to_numpy
 from openbabel import pybel
-from tqdm.auto import tqdm
 import os
 import numpy as np
+
 
 
 def guess_pybel_type(filename):

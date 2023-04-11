@@ -1,7 +1,8 @@
+from typing import Optional, Sequence, List
+
 import torch
-from ase import units
+from ase import Atoms
 from ase.calculators.calculator import Calculator, all_changes
-from torch import Tensor
 
 
 class AIMNetNSECalculator(Calculator):
@@ -15,7 +16,8 @@ class AIMNetNSECalculator(Calculator):
         # TODO: assume multiplicity from charge
         self.mult = mult if mult else abs(charge) + 1
 
-    def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
+    def calculate(self, atoms: Optional[Atoms] = None, properties: Sequence[str] = ('energy',),
+                  system_changes: List[str] = all_changes):
         super().calculate(atoms, properties, system_changes)
 
         # initialize input for AIMNet
