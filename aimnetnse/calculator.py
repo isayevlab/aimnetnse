@@ -38,7 +38,7 @@ class AIMNetNSECalculator(Calculator):
         # calculate forces
         if 'forces' in properties:
             e = Y['energy'].sum(-1)
-            Y['forces'] = - torch.autograd.grad(e, coord, torch.ones_like(e))[0]
+            Y['forces'] = - torch.autograd.grad(e, coord, torch.ones_like(e))[0].squeeze()
 
         # convert to numpy arrays
         output = {k: v.detach().cpu().numpy()
