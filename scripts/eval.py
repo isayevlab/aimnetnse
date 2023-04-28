@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import torch
 from torch import nn, Tensor
 from typing import Dict
@@ -135,9 +137,13 @@ if __name__ == '__main__':
     import h5py
     import argparse
 
+    path_aimnetnse = Path(__file__).parent
+    default_dataset = path_aimnetnse / 'test_dataset' / 'chembl20.h5'
+    default_models = (path_aimnetnse / 'resources').glob('*.jpt')
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('h5file')
-    parser.add_argument('models', nargs='+')
+    parser.add_argument('h5file', nargs='?', default=default_dataset, dest='h5file')
+    parser.add_argument('-m,', '--models', nargs='+', default=default_models)
     args = parser.parse_args()
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
