@@ -26,10 +26,18 @@ class EnsembleCalculator(nn.Module):
         return result
 
 
-def load_models(device: str = 'cpu'):
+def load_models(device: str = 'cpu', version: str = 'NSE'):
     aimnetnse_dir = Path(__file__).resolve().parent
-    resources_path = aimnetnse_dir / 'resources'
-    files = resources_path.glob('*.jpt')
-    models = [torch.jit.load(f) for f in files]
-    ensemble = EnsembleCalculator(*models)
-    return ensemble.to(device)
+    if version == 'NSE':
+        resources_path = aimnetnse_dir / 'resources'
+        files = resources_path.glob('*.jpt')
+        models = [torch.jit.load(f) for f in files]
+        ensemble = EnsembleCalculator(*models)
+        model = ensemble.to(device)
+    elif version == '2':
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        resources_path = aimnetnse_dir / 'aimnet2_wb97m-d3_ens.jpt'
+        model = torch.jit.load(resources_path, map_location=device)
+    return model
